@@ -10,7 +10,7 @@
 
     <title>ATM Project!</title>
   </head>
-  <body>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">ATM Project</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,38 +18,50 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Cash Transfer <span class="sr-only">(current)</span></a>
-      </li>
-       <li class="nav-item active">
-        <a class="nav-link" href="#">Cash Withdrawal <span class="sr-only">(current)</span></a>
-      </li>
-         <li class="nav-item active">
-        <a class="nav-link" href="#">Balance Enquiry <span class="sr-only">(current)</span></a>
-      </li>
-         <li class="nav-item active">
-        <a class="nav-link" href="#">Transaction History <span class="sr-only">(current)</span></a>
-      </li>
-        <li class="nav-item active">
-        <a class="nav-link" href="#">Pin Number Change <span class="sr-only">(current)</span></a>
-      </li>
-        <li class="nav-item active">
-        <a class="nav-link" href="#">Phone Number Change <span class="sr-only">(current)</span></a>
-      </li>
-        <li class="nav-item active">
-        <a class="nav-link" href="/about.html">About <span class="sr-only">(current)</span></a>
-      </li>
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Dropdown
+             </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Cash Transfer</a>
+                <a class="dropdown-item" href="#">Cash Withdrawal</a>
+                <a class="dropdown-item" href="#">Balance Enquiry</a>
+                <a class="dropdown-item" href="#">Transaction History</a>
+                <a class="dropdown-item" href="#">Change Pin Number</a>
+                <a class="dropdown-item" href="#">Change Phone Number</a>
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/about.html">About Us</a>
+              </div>
+          </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+              <a class="nav-link" href={% url 'logout' %}>Logout</a>
+              </li>
 
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+          {% else %}
+              <li class="nav-item">
+              <a class="nav-link" href={% url 'login' %}>Login</a>
+              </li>
+          {% endif %}
+      </ul>
   </div>
 </nav>
+    <br/><br/>
     <div class="container">
-        <br/>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissable" role="alert">
+                    <button class="close" data-dismiss="alert">
+                        <small><sup>x</sup></small>
+                    </button>
+                {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
         {% block content %}
 
         {% endblock %}

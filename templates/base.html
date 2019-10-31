@@ -31,19 +31,26 @@
                     <a class="dropdown-item" href="#">Transaction History</a>
                     <a class="dropdown-item" href="#">Change Pin Number</a>
                     <a class="dropdown-item" href="#">Change Phone Number</a>
+
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/about.html">About Us</a>
                   </div>
               </li>
-
+              <li class="nav-item">
+              <a class="nav-link" href={% url 'myAccount' %}>My Account</a>
+              </li>
               <li class="nav-item">
               <a class="nav-link" href={% url 'logout' %}>Logout</a>
               </li>
 
 
+
           {% else %}
               <li class="nav-item">
               <a class="nav-link" href={% url 'login' %}>Login</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href={% url 'register' %}>Register</a>
               </li>
           {% endif %}
       </ul>
